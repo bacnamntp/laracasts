@@ -12,17 +12,18 @@ class Article extends Model
         'body',
         'published_at',
         'user_id'   //temporary
-    ];
 
+    ];
     protected $dates = ['published_at'];
 
     public function scopePublished($query)
     {
-        $query->where('published_at','<=',Carbon::now());
+        $query->where('published_at', '<=', Carbon::now());
     }
+
     public function scopeUnpublished($query)
     {
-        $query->where('published_at','>',Carbon::now());
+        $query->where('published_at', '>', Carbon::now());
     }
 
     public function setPublishedAtAttribute($date)
@@ -34,6 +35,7 @@ class Article extends Model
     {
         return Carbon::parse($date)->format('Y-m-d');
     }
+
     /**
      * Get a list of tag ids associated with the current article
      * @return array of ids
@@ -51,6 +53,7 @@ class Article extends Model
     {
         return $this->belongsTo('App\User');
     }
+
     /**
      * Get the tags associated with the given article
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -59,7 +62,6 @@ class Article extends Model
     {
         return $this->belongsToMany('App\Tag');
     }
-
 
 
 }
